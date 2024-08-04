@@ -1,26 +1,27 @@
-class Table {
-  constructor(headers, tableData) {
-    this.headers = headers;
-    this.tableData = tableData;
+class VTable extends HTMLElement {
+  constructor() {
+    super();
+    this.headers = null;
+    this.tableData = null;
+  }
+  connectedCallback() {
+    this.headers = this.getAttribute("headers");
+    this.tableData = this.getAttribute("tableData");
+    this.render();
   }
   render() {
-    let table = '<table style="width:100%; border-collapse: collapse;">';
-    this.headers.forEach((row) => {
-      table += "<tr>";
-      row.forEach((cell) => {
-        table += `<th>${cell}</th>`;
-      });
-      table += "</tr>";
+    this.innerHTML = '<table style="width:100%; border-collapse: collapse;">';
+    table += "<tr>";
+    this.headers.forEach((cell) => {
+      table += `<th>${cell}</th>`;
     });
-    this.tableData.forEach((row) => {
-      table += "<tr>";
-      row.forEach((cell) => {
-        table += `<td >${cell}</td>`;
-      });
-      table += "</tr>";
+    table += "</tr>";
+    table += "<tr>";
+    this.tableData.forEach((cell) => {
+      table += `<td >${cell}</td>`;
     });
+    table += "</tr>";
     table += "</table>";
-    return table;
   }
 }
-export default Table;
+customElements.define("v-table", VTable);
