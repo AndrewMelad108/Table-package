@@ -1,9 +1,8 @@
 <template>
   <div class="filter-inputs w-full p-4 bg-slate-50 rounded-md shadow-md">
-    <div
-      class="search-input grid md:grid-cols-3 grid-cols-1 md:gap-6 gap-4 item-center"
-    >
+    <div class="search-input grid sm:gap-6 gap-4 sm:grid-cols-3 grid-cols-1">
       <multiselect
+        v-if="props.showFilterInputs"
         v-model="filterValue"
         :options="options"
         class="custom-multiselect"
@@ -18,42 +17,46 @@
       <input
         v-model="search"
         type="text"
-        class="form-input text-primary col-start-2 col-end-4"
-        placeholder="Search any field ..."
+        class="form-input text-primary focus:outline-0 h-10 p-2"
+        :class="
+          props.showFilterInputs
+            ? 'md:col-start-2 md:col-end-4'
+            : 'col-start-1 col-end-2'
+        "
+        placeholder="Search ..."
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { watch, defineEmits, ref } from "vue";
+import { watch, defineEmits, defineProps, ref, type Ref } from "vue";
 import Multiselect from "@suadelabs/vue3-multiselect";
 import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
 const emits = defineEmits(["search"]);
-const options = ref([
-  "Select  value",
-  "diagnosis",
-  "referred by",
-  "diagnosed by",
-  "number",
-]);
-const filterValue = ref("");
-const search = ref("");
-function debounce(func, wait) {
-  let timeout;
-  return (...args) => {
+const props = defineProps(["filtersOptions", "showFilterInputs"]);
+const options: Ref<string[]> = ref([...props.filtersOptions]);
+const filterValue: Ref<string> = ref("");
+const search: Ref<string> = ref("");
+function debounce(func: any, wait: any) {
+  let timeout: any;
+  return (...args: any) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   };
 }
-const debouncedSearchEmit = debounce((newValue) => {
+const debouncedSearchEmit = debounce((newValue: any) => {
   emits("search", newValue);
 }, 1000);
 
-watch(search, (newValue) => {
-  debouncedSearchEmit({
-    keySearch: filterValue.value.split(" ").join("_"),
-    inputValue: newValue,
-  });
+watch(search, (newValue: any) => {
+  if (props.showFilterInputs === true) {
+    debouncedSearchEmit({
+      keySearch: filterValue.value,
+      inputValue: newValue,
+    });
+  } else {
+    debouncedSearchEmit(newValue);
+  }
 });
 </script>
 <style>

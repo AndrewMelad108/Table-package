@@ -1,9 +1,10 @@
 <template>
   <div class="Table overflow-x-auto">
     <v-filter
-      v-if="props.showFilterInputs"
+      v-if="props.isShowSearch"
       :filterInputs="filterInputs"
-      :showFilterInputs="true"
+      :showFilterInputs="showFilterInputs"
+      :filtersOptions="filtersOptions"
       @changeFilterInput="changeFilterInput"
       @search="$emit('Search', $event)"
     ></v-filter>
@@ -19,19 +20,34 @@
       v-else
       class="shadow-md h-auto pb-14 overflow-x-auto shadow-gray-400 max-w-[100%]"
     >
-      <table class="w-full">
+      <table class="w-full min-h-full">
         <tr class="bg-black sticky left-0 right-0">
           <th
             v-for="(title, index) in props.labels"
             :key="index"
-            class="py-4 bg-slate-100 px-8"
+            class="py-4 bg-gray-200 px-8"
             :style="{ width: widthLabels }"
           >
             <p>{{ title }}</p>
           </th>
         </tr>
-        <tr v-for="(item, index) in data" :key="index">
-          <td class="text-center" v-for="(value, key) in item">{{ value }}</td>
+        <tr
+          class="cursor-pointer hover:bg-slate-50 hover:transition-all hover:duration-700"
+          v-for="(item, index) in data"
+          :key="index"
+        >
+          <td class="text-center p-4" v-for="(value, key) in item">
+            <span v-if="key !== 'actions'"> {{ value }}</span>
+            <div class="flex justify-center gap-4" v-else>
+              <button
+                @click="btn.callback"
+                :style="{ ...btn.style }"
+                v-for="(btn, index) in value"
+                :key="index"
+                v-html="btn.tag"
+              ></button>
+            </div>
+          </td>
         </tr>
       </table>
       <div
@@ -64,6 +80,8 @@ const props = defineProps([
   "totalPages",
   "filterInputs",
   "showFilterInputs",
+  "isShowSearch",
+  "filtersOptions",
   "currentPage",
   "itemsPerPage",
   "data",
@@ -86,3 +104,4 @@ const SortBy = (title: any, sortValue: any) => {
   });
 };
 </script>
+<style scoped></style>

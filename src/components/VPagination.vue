@@ -97,22 +97,13 @@ const emits = defineEmits(["changePage"]);
 const props = defineProps(["totalPages", "currentPage", "itemsPerPage"]);
 const prevPage = (): void => {
   if (props.currentPage && props.currentPage > 1)
-    emits("changePage", {
-      type: "prev",
-      value: props.currentPage - 1,
-    });
+    emits("changePage", props.currentPage - 1);
 };
 const nextPage = (): void => {
   if (props.currentPage && props.currentPage < (props.totalPages ?? 0))
-    emits("changePage", {
-      type: "next",
-      value: props.currentPage + 1,
-    });
+    emits("changePage", props.currentPage + 1);
 };
 const changePage = (page: number): void => {
-  emits("changePage", {
-    type: "change",
-    value: page,
-  });
+  emits("changePage", page);
 };
 </script>

@@ -1,5 +1,69 @@
-# Vue 3 + TypeScript + Vite
+# VTable Component
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Overview
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+This component is a dynamic, customizable table designed to handle various data representations. It is built with **Vue 3**, **Vite**, and **TypeScript**. The component includes pagination, filtering options, and the ability to search through data, making it versatile for different use cases.
+
+## Installation
+
+To use this component in your Vue.js project, install the npm package:
+
+```bash
+npm install v-table-package
+```
+
+## Usage
+
+### in Vue Template:
+
+```bash
+<template>
+  <VTable
+    :labels="labels"
+    :data="data"
+    :currentPage="currentPage"
+    :totalPages="150"
+    @changePage="changePage"
+  ></VTable>
+</template>
+
+```
+
+### in Vue Script:
+
+```bash
+<script setup lang="ts">
+import { ref } from "vue";
+import VTable from "v-table-package";
+const labels = ref(["name", "description", "actions"]);
+const currentPage = ref(1);
+const data = ref([
+  {
+    name: "asd",
+    description: "asd",
+    actions: [
+      {
+        tag: "<p>add</p>",
+        style: {},
+        callback: () => {
+          return console.log("add success");
+        },
+      },
+      {
+        tag: "<p>edit</p>",
+        style: {},
+        callback: () => {
+          return console.log("edit success");
+        },
+      },
+    ],
+  },
+]);
+// VPagination Function
+const changePage = (page) => {
+  currentPage.value = page;
+};
+
+</script>
+
+```
