@@ -9,8 +9,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "./src/index.ts"),
-      name: "VTablePackage",
-      fileName: "v-table-package",
+      name: "TableVue",
+      fileName: "table-vue",
     },
     rollupOptions: {
       external: ["vue"],
