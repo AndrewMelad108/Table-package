@@ -34,7 +34,7 @@ npm install v-table-package
 ```bash
 <script setup lang="ts">
 import { ref } from "vue";
-import VTable from "v-table-package";
+import { VTable } from "v-table-package";
 const labels = ref(["name", "description", "actions"]);
 const currentPage = ref(1);
 const data = ref([
