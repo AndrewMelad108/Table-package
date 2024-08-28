@@ -1,45 +1,63 @@
 {
-  "name": "v-table-component",
-  "version": "0.0.15",
-  "type": "module",
-  "private": false,
+  "name": "v-table-package",
+  "version": "0.0.22",
+  "description": "Vue package Library Example",
+  "license": "Apache-2.0",
+  "homepage": "https://www.npmjs.com/package/v-table-package",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrisom/v-table-package"
+  },
+  "main": "./dist/v-table-package.cjs.js",
+  "module": "./dist/v-table-package.es.js",
   "files": [
-    "dist",
-    "types"
+    "dist/",
+    "src/"
   ],
-  "main": "./dist/v-table-component.umd.js",
-  "module": "./dist/v-table-component.es.js",
-  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/v-table-component.es.js",
-      "require": "./dist/v-table-component.umd.js"
-    },
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+      "import": "./dist/v-table-package.cjs.js",
+      "require": "./dist/v-table-package.es.js"
     }
   },
+  "./dist/style.css": {
+    "import": "./dist/style.css",
+    "require": "./dist/style.css"
+  },
+  "browser": {
+    ".": "./dist/vue-npm-library-example.es.js"
+  },
+  "types": "./dist/ViewerPlugin.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly && mv dist/src dist/types",
-    "types": "vue-tsc --declaration",
-    "preview": "vite preview"
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "test": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@suadelabs/vue3-multiselect": "^1.0.2",
-    "vue": "^3.4.37"
+    "@types/vue": "^2.0.0"
   },
+  "keywords": [
+    "vue",
+    "vue3",
+    "Table",
+    "library"
+  ],
+  "author": "Andrew Melad",
   "devDependencies": {
+    "@babel/types": "^7.25.4",
     "@types/node": "^22.5.1",
     "@vitejs/plugin-vue": "^5.1.2",
+    "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.17",
+    "sass": "^1.77.8",
     "tailwindcss": "^3.4.1",
     "tailwindcss-rtl": "^0.9.0",
-    "typescript": "^5.5.3",
-    "vite": "^5.4.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
     "vite-plugin-css-injected-by-js": "^3.5.1",
     "vite-plugin-dts": "^4.0.3",
-    "vue-tsc": "^2.0.29"
+    "vue": "^3.4.38",
+    "vue-tsc": "^2.0.29",
+    "rollup-plugin-typescript2": "^0.33.0"
   }
 }

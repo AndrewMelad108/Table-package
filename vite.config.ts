@@ -1,33 +1,47 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import path from "path";
+import typescript2 from "rollup-plugin-typescript2";
+import { resolve } from "path";
 
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
-
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), cssInjectedByJsPlugin()],
-  resolve: {
-    alias: {
-      "@/": new URL("./src/", import.meta.url).pathname,
-    },
-  },
-
+  plugins: [
+    vue(),
+    typescript2({
+      check: false,
+      include: ["src/components/**/*.vue"],
+      tsconfigOverride: {
+        compilerOptions: {
+          outDir: "dist",
+          sourceMap: true,
+          declaration: true,
+          declarationMap: true,
+        },
+      },
+      exclude: ["vite.config.ts"],
+    }),
+  ],
   build: {
-    cssCodeSplit: true,
-    target: "esnext",
+    cssCodeSplit: false,
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "VTableComponent",
-      fileName: (format) => `v-table-componet.${format}.js`,
+      entry: "./src/index.ts",
+      formats: ["es", "cjs"],
+      name: "ViewerPlugin",
+      fileName: (format) => `v-table-package.${format}.js`,
     },
-
     rollupOptions: {
       external: ["vue"],
       output: {
+        exports: "named",
         globals: {
           vue: "Vue",
         },
       },
+    },
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
     },
   },
 });
