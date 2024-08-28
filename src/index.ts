@@ -1,2 +1,1 @@
-import VTable from "./components/VTable.vue";
-export { VTable };
+export { default as VTable } from "./components/VTable.vue";

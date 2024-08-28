@@ -9,7 +9,7 @@ This component is a dynamic, customizable table designed to handle various data 
 To use this component in your Vue.js project, install the npm package:
 
 ```bash
-npm install v-table-package
+npm install v-table-component
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ npm install v-table-package
 ```bash
 <script setup lang="ts">
 import { ref } from "vue";
-import { VTable } from "v-table-package";
+import { VTable } from "v-table-component";
 const labels = ref(["name", "description", "actions"]);
 const currentPage = ref(1);
 const data = ref([

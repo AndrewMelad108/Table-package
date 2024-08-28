@@ -37,7 +37,9 @@
           :key="index"
         >
           <td class="text-center p-4" v-for="(value, key) in item">
-            <span v-if="key !== 'actions'"> {{ value }}</span>
+            <p v-if="typeof key === 'string'">
+              <span v-if="key !== 'actions'"> {{ value }}</span>
+            </p>
             <div class="flex justify-center gap-4" v-else>
               <button
                 @click="btn.callback"
