@@ -1,18 +1,17 @@
 {
   "name": "v-table-package",
-  "version": "0.0.22",
-  "description": "Vue package Library Example",
+  "version": "0.0.1",
+  "description": "Vue package Library",
   "license": "Apache-2.0",
   "homepage": "https://www.npmjs.com/package/v-table-package",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agrisom/v-table-package"
+    "url": "git+https://github.com/AndrewMelad108/Table-package"
   },
   "main": "./dist/v-table-package.cjs.js",
   "module": "./dist/v-table-package.es.js",
   "files": [
-    "dist/",
-    "src/"
+    "dist"
   ],
   "exports": {
     ".": {
@@ -20,27 +19,25 @@
       "require": "./dist/v-table-package.es.js"
     }
   },
-  "./dist/style.css": {
-    "import": "./dist/style.css",
-    "require": "./dist/style.css"
-  },
   "browser": {
     ".": "./dist/vue-npm-library-example.es.js"
   },
   "types": "./dist/ViewerPlugin.d.ts",
   "scripts": {
     "build": "vite build && vue-tsc --emitDeclarationOnly",
-    "test": "vue-tsc --noEmit"
+    "test": "vue-tsc --noEmit",
+    "dev": "vite"
   },
   "dependencies": {
     "@suadelabs/vue3-multiselect": "^1.0.2",
     "@types/vue": "^2.0.0"
   },
   "keywords": [
-    "vue",
     "vue3",
+    "vite",
     "Table",
-    "library"
+    "typescript",
+    "tailwindcss"
   ],
   "author": "Andrew Melad",
   "devDependencies": {

@@ -70,6 +70,7 @@
 <script lang="ts" setup>
 import VPagination from "./VPagination.vue";
 import VFilter from "./VFilter.vue";
+import "../style.css";
 import { defineEmits, defineProps, ref, computed, type Ref } from "vue";
 const emits = defineEmits([
   "Search",
