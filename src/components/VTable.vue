@@ -28,7 +28,26 @@
             class="py-4 bg-gray-200 px-8"
             :style="{ width: widthLabels }"
           >
-            <p>{{ title }}</p>
+            <div class="flex items-center gap-4">
+              <p>
+                {{ title }}
+              </p>
+              <div
+                v-if="sortableColumns.includes(title)"
+                class="sort-column flex flex-col"
+              >
+                <span
+                  @click="SortBy(title, 'asc')"
+                  class="rotate-90 cursor-pointer hover:opacity-5"
+                  ><</span
+                >
+                <span
+                  @click="SortBy(title, 'desc')"
+                  class="rotate-90 cursor-pointer hover:opacity-5"
+                  >></span
+                >
+              </div>
+            </div>
           </th>
         </tr>
         <tr
@@ -38,7 +57,9 @@
         >
           <td class="text-center p-4" v-for="(value, key) in item">
             <p v-if="typeof key === 'string'">
-              <span v-if="key !== 'actions'"> {{ value }}</span>
+              <span v-if="key !== 'actions'">
+                {{ value }}
+              </span>
             </p>
             <div class="flex justify-center gap-4" v-else>
               <button
@@ -89,6 +110,7 @@ const props = defineProps([
   "itemsPerPage",
   "data",
   "labels",
+  "sortableColumns",
 ]) as any;
 const changeFilterInput = (inputsArray: any) => {
   emits("changeFilterInput", inputsArray);
@@ -100,10 +122,10 @@ const totalPages = computed(() =>
   Math.ceil((props.totalPages ?? 1) / (props.itemsPerPage ?? 1))
 );
 
-const SortBy = (title: any, sortValue: any) => {
+const SortBy = (title: string, direction: string) => {
   emits("SortBy", {
-    title: title.split(" ").join("_"),
-    sortValue: sortValue,
+    title: title,
+    direction: direction,
   });
 };
 </script>

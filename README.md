@@ -170,3 +170,78 @@ const handleSearch = (filterObject) => {
 </script>
 
 ```
+
+## Sort Functionality
+
+To add sorting capabilities, you can use the following structure:
+
+### in Vue Template:
+
+```bash
+<template>
+  <VTable
+    :labels="labels"
+    :data="data"
+    :currentPage="currentPage"
+    :totalPages="150"
+    @changePage="changePage"
+    @SortBy="SortBy"
+  ></VTable>
+</template>
+```
+
+### in Vue Script:
+
+```bash
+<script setup lang="ts">
+import { ref } from "vue";
+import { VTable } from "v-table-component";
+
+// Define the columns that are sortable
+const sortableColumns = ref(["name", "description"]);
+
+// Define the labels for the table columns
+const labels = ref(["name", "description", "actions"]);
+
+// Track the current page number
+const currentPage = ref(1);
+
+// Sample data to display in the table
+const data = ref([
+  {
+    name: "Example Name",
+    description: "Example Description",
+    actions: [
+      {
+        tag: "<p>add</p>",
+        style: {},
+        callback: () => {
+          console.log("add success");
+        },
+      },
+      {
+        tag: "<p>edit</p>",
+        style: {},
+        callback: () => {
+          console.log("edit success");
+        },
+      },
+    ],
+  },
+]);
+
+// Sort function to handle sorting logic
+const SortBy = (Sortobject) => {
+  /*
+  Sortobject = {
+    title: title,        // The column title to sort by
+    direction: direction // The sorting direction (asc or desc)
+  };
+  */
+  console.log(`Sorting by: ${Sortobject.title} in ${Sortobject.direction} order`);
+  // Implement your sorting logic here
+};
+</script>
+
+
+```
