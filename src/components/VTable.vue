@@ -4,7 +4,9 @@
       v-if="props.isShowSearch"
       :filterInputs="filterInputs"
       :showFilterInputs="showFilterInputs"
-      :filtersOptions="filtersOptions"
+      :filtersOptions="
+        filtersOptions && filtersOptions.length > 0 ? filtersOptions : []
+      "
       @changeFilterInput="changeFilterInput"
       @search="$emit('Search', $event)"
     ></v-filter>
@@ -28,12 +30,12 @@
             class="py-4 bg-gray-200 px-8"
             :style="{ width: widthLabels }"
           >
-            <div class="flex items-center gap-4">
+            <div class="flex justify-center items-center gap-4">
               <p>
                 {{ title }}
               </p>
               <div
-                v-if="sortableColumns.includes(title)"
+                v-if="sortableColumns && sortableColumns.includes(title)"
                 class="sort-column flex flex-col"
               >
                 <span
@@ -56,12 +58,10 @@
           :key="index"
         >
           <td class="text-center p-4" v-for="(value, key) in item">
-            <p v-if="typeof key === 'string'">
-              <span v-if="key !== 'actions'">
-                {{ value }}
-              </span>
-            </p>
-            <div class="flex justify-center gap-4" v-else>
+            <span v-if="typeof key === 'string' && key !== 'actions'">
+              {{ value }}
+            </span>
+            <div v-else class="flex justify-center gap-4">
               <button
                 @click="btn.callback"
                 :style="{ ...btn.style }"

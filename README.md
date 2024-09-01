@@ -125,6 +125,7 @@ To add filtering capabilities, you can use the following structure:
     :data="data"
     :currentPage="currentPage"
     :totalPages="150"
+    :isShowSearch="true"  // Enable search input
     :showFilterInputs="true"  // Enable filter inputs
     :filtersOptions="filtersOptions"  // Provide filter options
     @Search="handleSearch"  // Handle search with filters
@@ -184,6 +185,7 @@ To add sorting capabilities, you can use the following structure:
     :data="data"
     :currentPage="currentPage"
     :totalPages="150"
+    :sortableColumns="sortableColumns"
     @changePage="changePage"
     @SortBy="SortBy"
   ></VTable>

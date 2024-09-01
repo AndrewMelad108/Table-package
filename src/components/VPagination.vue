@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap items-baseline justify-between">
+  <div class="flex flex-wrap px-4 items-baseline justify-between">
     <div class="text-sm">
       Total: {{ props.totalPages && props.totalPages.toLocaleString("en") }}
     </div>

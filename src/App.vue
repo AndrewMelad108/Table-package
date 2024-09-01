@@ -25,7 +25,7 @@
 //     description: "asd",
 //     actions: [
 //       {
-//         tag: "<img src='./assets/icons8-done.gif' />",
+//         tag: "",
 //         style: {},
 //         callback: () => {
 //           return console.log("add success");
