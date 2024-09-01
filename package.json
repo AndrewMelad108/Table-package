@@ -1,22 +1,22 @@
 {
-  "name": "v-table-package",
-  "version": "0.0.1",
+  "name": "v-table-system",
+  "version": "0.0.2",
   "description": "Vue package Library",
   "license": "Apache-2.0",
-  "homepage": "https://www.npmjs.com/package/v-table-package",
+  "homepage": "https://www.npmjs.com/package/v-table-system",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndrewMelad108/Table-package"
   },
-  "main": "./dist/v-table-package.cjs.js",
-  "module": "./dist/v-table-package.es.js",
+  "main": "./dist/v-table-system.cjs.js",
+  "module": "./dist/v-table-system.es.js",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/v-table-package.cjs.js",
-      "require": "./dist/v-table-package.es.js"
+      "import": "./dist/v-table-system.cjs.js",
+      "require": "./dist/v-table-system.es.js"
     }
   },
   "browser": {

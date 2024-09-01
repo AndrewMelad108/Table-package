@@ -29,7 +29,7 @@ export default defineConfig({
       entry: "./src/index.ts",
       formats: ["es", "cjs"],
       name: "ViewerPlugin",
-      fileName: (format) => `v-table-package.${format}.js`,
+      fileName: (format) => `v-table-system.${format}.js`,
     },
     rollupOptions: {
       external: ["vue"],

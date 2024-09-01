@@ -9,7 +9,7 @@ This component is a dynamic, customizable table designed to handle various data 
 To use this component in your Vue.js project, install the npm package:
 
 ```bash
-npm install v-table-component
+npm install v-table-system
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ npm install v-table-component
 ```bash
 <script setup lang="ts">
 import { ref } from "vue";
-import { VTable } from "v-table-component";
+import { VTable } from "v-table-system";
 const labels = ref(["name", "description", "actions"]);
 const currentPage = ref(1);
 const data = ref([
@@ -93,7 +93,7 @@ To enable search functionality in the VTable component, use the following templa
 ```bash
 <script setup lang="ts">
 import { ref } from "vue";
-import { VTable } from "v-table-component";
+import { VTable } from "v-table-system";
 
 const labels = ref(["name", "description", "actions"]);
 const currentPage = ref(1);
@@ -138,7 +138,7 @@ To add filtering capabilities, you can use the following structure:
 ```bash
 <script setup lang="ts">
 import { ref } from "vue";
-import { VTable } from "v-table-component";
+import { VTable } from "v-table-system";
 
 const labels = ref(["name", "description", "actions"]);
 const currentPage = ref(1);
@@ -195,7 +195,7 @@ To add sorting capabilities, you can use the following structure:
 ```bash
 <script setup lang="ts">
 import { ref } from "vue";
-import { VTable } from "v-table-component";
+import { VTable } from "v-table-system";
 
 // Define the columns that are sortable
 const sortableColumns = ref(["name", "description"]);
