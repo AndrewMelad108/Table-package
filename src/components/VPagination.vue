@@ -1,10 +1,12 @@
 <template>
-  <div class="flex flex-wrap px-4 items-baseline justify-between">
-    <div class="text-sm">
+  <div
+    class="flex sm:flex-row flex-col flex-wrap sm:mt-0 mt-4 px-4 sm:items-baseline sm:justify-between"
+  >
+    <div class="text-sm sm:text-left text-center sm:order-2 order-2">
       Total: {{ props.totalPages && props.totalPages.toLocaleString("en") }}
     </div>
     <ul
-      class="flex items-center justify-self-end space-x-1 rtl:space-x-reverse my-4"
+      class="flex items-center sm:justify-start justify-center sm:justify-self-end space-x-1 rtl:space-x-reverse my-4 sm:order-2 order-1"
     >
       <li>
         <button
@@ -13,7 +15,11 @@
           :disabled="currentPage === 1"
           @click="prevPage"
         >
-          <
+          <img
+            src="../assets/icon.svg"
+            class="h-3 rotate-180 cursor-pointer"
+            alt="icon.svg"
+          />
         </button>
       </li>
 
@@ -85,7 +91,7 @@
           :disabled="currentPage === totalPages"
           @click="nextPage"
         >
-          >
+          <img src="../assets/icon.svg" class="h-3" alt="icon.svg" />
         </button>
       </li>
     </ul>

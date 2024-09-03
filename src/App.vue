@@ -40,6 +40,26 @@
 //       },
 //     ],
 //   },
+//   {
+//     name: "asd",
+//     description: "asd",
+//     actions: [
+//       {
+//         tag: "",
+//         style: {},
+//         callback: () => {
+//           return console.log("add success");
+//         },
+//       },
+//       {
+//         tag: "<p>edit</p>",
+//         style: {},
+//         callback: () => {
+//           return console.log("edit success");
+//         },
+//       },
+//     ],
+//   },
 // ]);
 // const filtersOptions = ref([
 //   "Select  value",

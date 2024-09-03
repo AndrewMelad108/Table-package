@@ -1,5 +1,5 @@
 <template>
-  <div class="Table overflow-x-auto">
+  <div class="Table overflow-x-auto px-2 bg-gray-100 p-4">
     <v-filter
       v-if="props.isShowSearch"
       :filterInputs="filterInputs"
@@ -20,48 +20,58 @@
     </div>
     <div
       v-else
-      class="shadow-md h-auto pb-14 overflow-x-auto shadow-gray-400 max-w-[100%]"
+      class="shadow-md h-auto pb-14 mt-4 overflow-x-auto shadow-gray-400 max-w-[100%]"
     >
       <table class="w-full min-h-full">
-        <tr class="bg-black sticky left-0 right-0">
+        <tr class="sticky left-0 p-2 right-0">
           <th
             v-for="(title, index) in props.labels"
             :key="index"
-            class="py-4 bg-gray-200 px-8"
+            class="text-xs py-4 px-2 w-full text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
             :style="{ width: widthLabels }"
           >
-            <div class="flex justify-center items-center gap-4">
+            <div class="flex items-center gap-4">
               <p>
                 {{ title }}
               </p>
               <div
                 v-if="sortableColumns && sortableColumns.includes(title)"
-                class="sort-column flex flex-col"
+                class="sort-column flex flex-col gap-2"
               >
                 <span
                   @click="SortBy(title, 'asc')"
-                  class="rotate-90 cursor-pointer hover:opacity-5"
-                  ><</span
-                >
+                  class="-rotate-90 cursor-pointer hover:opacity-5"
+                  ><img
+                    src="../assets/icon.svg"
+                    alt="icom-svg"
+                    class="w-auto h-2"
+                /></span>
                 <span
                   @click="SortBy(title, 'desc')"
                   class="rotate-90 cursor-pointer hover:opacity-5"
-                  >></span
-                >
+                  ><img
+                    src="../assets/icon.svg"
+                    alt="icom-svg"
+                    class="w-auto h-2"
+                /></span>
               </div>
             </div>
           </th>
         </tr>
         <tr
-          class="cursor-pointer hover:bg-slate-50 hover:transition-all hover:duration-700"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
           v-for="(item, index) in data"
           :key="index"
         >
-          <td class="text-center p-4" v-for="(value, key) in item">
+          <td
+            :style="{ width: widthLabels }"
+            class="p-2"
+            v-for="(value, key) in item"
+          >
             <span v-if="typeof key === 'string' && key !== 'actions'">
               {{ value }}
             </span>
-            <div v-else class="flex justify-center gap-4">
+            <div v-else class="flex gap-1">
               <button
                 @click="btn.callback"
                 :style="{ ...btn.style }"
