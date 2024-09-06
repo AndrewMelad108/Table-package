@@ -1,5 +1,5 @@
 <template>
-  <div class="Table overflow-x-auto px-2 bg-gray-100 p-4">
+  <div class="Table overflow-auto bg-gray-100 m-4 p-4 rounded-md">
     <v-filter
       v-if="props.isShowSearch"
       :filterInputs="filterInputs"
@@ -20,52 +20,38 @@
     </div>
     <div
       v-else
-      class="shadow-md h-auto pb-14 mt-4 overflow-x-auto shadow-gray-400 max-w-[100%]"
+      class="shadow-md max-h-[100vh] pb-14 mt-4 overflow-x-auto shadow-gray-400 rounded-md max-w-[100%]"
     >
-      <table class="w-full min-h-full">
+      <table class="md:w-full w-[600px] border-collapse">
         <tr class="sticky left-0 p-2 right-0">
           <th
             v-for="(title, index) in props.labels"
             :key="index"
-            class="text-xs py-4 px-2 w-full text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            :style="{ width: widthLabels }"
+            class="py-4 px-2 w-full text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400"
+            :style="{ 'max-width': widthLabels }"
           >
-            <div class="flex items-center gap-4">
-              <p>
+            <div class="flex gap-[2px] min-h-6">
+              <v-sort
+                v-if="sortableColumns && sortableColumns.includes(title)"
+                :title="title"
+                @SortBy="$emit('SortBy', $event)"
+                class="self-end"
+              ></v-sort>
+              <p class="text-xs self-end">
                 {{ title }}
               </p>
-              <div
-                v-if="sortableColumns && sortableColumns.includes(title)"
-                class="sort-column flex flex-col gap-2"
-              >
-                <span
-                  @click="SortBy(title, 'asc')"
-                  class="-rotate-90 cursor-pointer hover:opacity-5"
-                  ><img
-                    src="../assets/icon.svg"
-                    alt="icom-svg"
-                    class="w-auto h-2"
-                /></span>
-                <span
-                  @click="SortBy(title, 'desc')"
-                  class="rotate-90 cursor-pointer hover:opacity-5"
-                  ><img
-                    src="../assets/icon.svg"
-                    alt="icom-svg"
-                    class="w-auto h-2"
-                /></span>
-              </div>
             </div>
           </th>
         </tr>
         <tr
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+          class="odd:bg-gray-200 hover:bg-gray-300 even:bg-white cursor-pointer dark:bg-gray-800 dark:border-gray-700 transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
           v-for="(item, index) in data"
+          @click="$emit('selectRow', item)"
           :key="index"
         >
           <td
             :style="{ width: widthLabels }"
-            class="p-2"
+            class="p-3"
             v-for="(value, key) in item"
           >
             <span v-if="typeof key === 'string' && key !== 'actions'">
@@ -73,7 +59,7 @@
             </span>
             <div v-else class="flex gap-1">
               <button
-                @click="btn.callback"
+                @click.passive.stop="btn.callback"
                 :style="{ ...btn.style }"
                 v-for="(btn, index) in value"
                 :key="index"
@@ -101,6 +87,7 @@
 <script lang="ts" setup>
 import VPagination from "./VPagination.vue";
 import VFilter from "./VFilter.vue";
+import VSort from "./VSort.vue";
 import "../style.css";
 import { defineEmits, defineProps, ref, computed, type Ref } from "vue";
 const emits = defineEmits([
@@ -108,6 +95,7 @@ const emits = defineEmits([
   "changeFilterInput",
   "changePage",
   "SortBy",
+  "selectRow",
 ]);
 const props = defineProps([
   "loading",
@@ -131,12 +119,5 @@ const widthLabels = computed(() => {
 const totalPages = computed(() =>
   Math.ceil((props.totalPages ?? 1) / (props.itemsPerPage ?? 1))
 );
-
-const SortBy = (title: string, direction: string) => {
-  emits("SortBy", {
-    title: title,
-    direction: direction,
-  });
-};
 </script>
 <style scoped></style>

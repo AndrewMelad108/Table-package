@@ -11,7 +11,7 @@
       <li>
         <button
           type="button"
-          class="flex justify-center font-semibold w-10 h-10 items-center rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
+          class="flex justify-center font-semibold w-10 h-10 items-center rounded-full transition bg-gray-200 text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
           :disabled="currentPage === 1"
           @click="prevPage"
         >
@@ -34,7 +34,7 @@
           class="flex justify-center items-center font-semibold h-10 w-10 rounded-full transition"
           :class="{
             'bg-primary text-white dark:bg-primary': page === currentPage,
-            'bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary':
+            'bg-gray-200 text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary':
               page !== currentPage,
           }"
           @click="changePage(page)"
@@ -53,7 +53,7 @@
           class="flex justify-center font-semibold h-10 w-10 items-center rounded-full transition"
           :class="{
             'bg-primary text-white dark:bg-primary': page === currentPage,
-            'bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary':
+            'bg-gray-200 text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary':
               page !== currentPage,
           }"
           @click="changePage(page)"
@@ -76,7 +76,7 @@
           class="flex justify-center items-center font-semibold w-10 h-10 rounded-full transition"
           :class="{
             'bg-primary text-white dark:bg-primary': page === currentPage,
-            'bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary':
+            'bg-gray-200 text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary':
               page !== currentPage,
           }"
           @click="changePage(page)"
@@ -87,7 +87,7 @@
       <li>
         <button
           type="button"
-          class="flex justify-center font-semibold h-10 w-10 items-center rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
+          class="flex justify-center font-semibold h-10 w-10 items-center rounded-full transition bg-gray-200 text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
           :disabled="currentPage === totalPages"
           @click="nextPage"
         >
