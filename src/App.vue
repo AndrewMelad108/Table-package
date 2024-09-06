@@ -1,5 +1,5 @@
 <template>
-  <!-- <VTable
+   <!-- <VTable
     :labels="labels"
     :data="data"
     :currentPage="currentPage"
@@ -12,7 +12,7 @@
     @changePage="changePage"
     @SortBy="SortBy"
     @selectRow="selectRow"
-  ></VTable> -->
+  ></VTable>  -->
 </template>
 <script setup lang="ts">
 // import { ref } from "vue";
@@ -221,17 +221,17 @@
 //   },
 // ]);
 // const filtersOptions = ref(["diagnosis", "referred ", "diagnosed ", "number"]);
-// const changePage = (page) => {
+// const changePage = (page :any) => {
 //   console.log(page);
 //   currentPage.value = page;
 // };
-// const Search = (obj) => {
+// const Search = (obj:any) => {
 //   console.log(obj);
 // };
-// const SortBy = (obj) => {
+// const SortBy = (obj:any) => {
 //   console.log(obj);
 // };
-// const selectRow = (obj) => {
+// const selectRow = (obj:any) => {
 //   console.log(obj);
 // };
 </script>

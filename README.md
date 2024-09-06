@@ -68,6 +68,88 @@ const changePage = (page) => {
 
 ```
 
+## Select Row Functionality
+
+To enable select row functionality in the VTable component, use the following template:
+
+### in Vue Template:
+
+```bash
+<template>
+  <VTable
+    :labels="labels"
+    :data="data"
+    :currentPage="currentPage"
+    :totalPages="150"
+    :sortableColumns="sortableColumns"
+    @changePage="changePage"
+    @SortBy="SortBy"
+    @selectRow="selectRowHandler"  <!-- Capture the selected row -->
+  ></VTable>
+</template>
+```
+
+### in Vue Script:
+
+```bash
+<script setup lang="ts">
+import { ref } from "vue";
+import { VTable } from "v-table-system";
+
+const labels = ref(["name", "description", "actions"]);
+const currentPage = ref(1);
+const sortableColumns = ref(["name", "description"]);
+
+const data = ref([
+  {
+    name: "John Doe",
+    description: "Sample Description",
+    actions: [
+      {
+        tag: "<p>add</p>",
+        style: {},
+        callback: () => {
+          console.log("add success");
+        },
+      },
+      {
+        tag: "<p>edit</p>",
+        style: {},
+        callback: () => {
+          console.log("edit success");
+        },
+      },
+    ],
+  },
+  {
+    name: "Jane Smith",
+    description: "Another Description",
+    actions: [
+      {
+        tag: "<p>add</p>",
+        style: {},
+        callback: () => {
+          console.log("add success");
+        },
+      },
+      {
+        tag: "<p>edit</p>",
+        style: {},
+        callback: () => {
+          console.log("edit success");
+        },
+      },
+    ],
+  },
+]);
+
+// Handle row selection
+const selectRowHandler = (selectedRow) => {
+  console.log("Selected Row:", selectedRow);
+  // Implement any additional actions based on the selected row
+};
+</script>
+```
 ## Search Functionality
 
 To enable search functionality in the VTable component, use the following template:
