@@ -81,9 +81,7 @@ To enable select row functionality in the VTable component, use the following te
     :data="data"
     :currentPage="currentPage"
     :totalPages="150"
-    :sortableColumns="sortableColumns"
     @changePage="changePage"
-    @SortBy="SortBy"
     @selectRow="selectRowHandler"  <!-- Capture the selected row -->
   ></VTable>
 </template>
@@ -98,7 +96,6 @@ import { VTable } from "v-table-system";
 
 const labels = ref(["name", "description", "actions"]);
 const currentPage = ref(1);
-const sortableColumns = ref(["name", "description"]);
 
 const data = ref([
   {
