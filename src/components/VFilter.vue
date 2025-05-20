@@ -18,25 +18,28 @@
         v-model="search"
         type="text"
         class="form-input text-primary focus:outline-0 h-10 p-2"
-        :class="
-          props.showFilterInputs
-            ? 'md:col-start-2 md:col-end-4'
-            : 'col-start-1 col-end-2'
-        "
+        :class="props.showFilterInputs ? 'md:col-start-2 md:col-end-4' : 'col-start-1 col-end-2'"
         placeholder="Search ..."
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+// Import Vue Files 
 import { watch, defineEmits, defineProps, ref, type Ref } from "vue";
 import Multiselect from "@suadelabs/vue3-multiselect";
 import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
-const emits = defineEmits(["search"]);
-const props = defineProps(["filtersOptions", "showFilterInputs"]);
+
+// Variables
 const options: Ref<string[]> = ref([...props.filtersOptions]);
 const filterValue: Ref<string> = ref("");
 const search: Ref<string> = ref("");
+
+//Props and Emits
+const emits = defineEmits(["search"]);
+const props = defineProps(["filtersOptions", "showFilterInputs"]);
+
+//Functions
 function debounce(func: any, wait: any) {
   let timeout: any;
   return (...args: any) => {
