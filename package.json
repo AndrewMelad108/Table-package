@@ -1,7 +1,7 @@
 {
   "name": "v-table-system",
-  "version": "0.0.12",
-  "description": "Vue package Library",
+  "version": "0.1.0",
+  "description": "Data table for Vue 3 that also ships as a web component for any framework",
   "license": "Apache-2.0",
   "homepage": "https://www.npmjs.com/package/v-table-system",
   "repository": {
@@ -15,46 +15,59 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/v-table-system.cjs.js",
-      "require": "./dist/v-table-system.es.js"
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/v-table-system.es.js",
+      "require": "./dist/v-table-system.cjs.js"
+    },
+    "./element": {
+      "types": "./dist/src/element.d.ts",
+      "import": "./dist/v-table-system.element.es.js",
+      "default": "./dist/v-table-system.element.iife.js"
     }
   },
-  "browser": {
-    ".": "./dist/vue-npm-library-example.es.js"
-  },
-  "types": "./dist/ViewerPlugin.d.ts",
+  "types": "./dist/src/index.d.ts",
+  "unpkg": "./dist/v-table-system.element.iife.js",
+  "jsdelivr": "./dist/v-table-system.element.iife.js",
   "scripts": {
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "vite build && vite build --mode element && vue-tsc --emitDeclarationOnly",
     "test": "vue-tsc --noEmit",
-    "dev": "vite"
+    "dev": "vite",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "@suadelabs/vue3-multiselect": "^1.0.2",
-    "@types/vue": "^2.0.0"
+    "@suadelabs/vue3-multiselect": "^1.0.2"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
   },
   "keywords": [
     "vue3",
     "vite",
     "Table",
+    "datatable",
+    "web-component",
+    "custom-element",
     "typescript",
     "tailwindcss"
   ],
   "author": "Andrew Melad",
   "devDependencies": {
-    "@babel/types": "^7.25.4",
-    "@types/node": "^22.5.1",
-    "@vitejs/plugin-vue": "^5.1.2",
+    "@babel/types": "^7.29.11",
+    "@types/node": "^22.20.5",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.5.1",
-    "autoprefixer": "^10.4.17",
-    "sass": "^1.77.8",
-    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.6.2",
+    "sass": "^1.108.2",
+    "tailwindcss": "^3.4.19",
     "tailwindcss-rtl": "^0.9.0",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.2",
-    "vite-plugin-css-injected-by-js": "^3.5.1",
-    "vite-plugin-dts": "^4.0.3",
-    "vue": "^3.4.38",
-    "vue-tsc": "^2.0.29",
-    "rollup-plugin-typescript2": "^0.33.0"
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
+    "vite-plugin-dts": "^4.5.4",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.45",
+    "vue-tsc": "^2.2.12"
   }
 }

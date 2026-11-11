@@ -1,6 +1,8 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
+  // The table ships its own scoped reset in src/style.css
+  corePlugins: { preflight: false },
   theme: {
     container: {
       center: true,

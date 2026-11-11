@@ -1,5 +1,5 @@
 <template>
-  <div class="filter-inputs w-full p-4 bg-slate-50 rounded-md shadow-md">
+  <div class="filter-inputs w-full p-4 bg-slate-50 dark:bg-gray-800 rounded-md shadow-md">
     <div class="search-input grid sm:gap-6 gap-4 sm:grid-cols-3 grid-cols-1">
       <multiselect
         v-if="props.showFilterInputs"
@@ -9,7 +9,7 @@
         :searchable="false"
         :preselect-first="true"
         :allow-empty="false"
-        placeholder="Select filter value"
+        :placeholder="texts.filterPlaceholder"
         selected-label=""
         select-label=""
         deselect-label=""
@@ -17,49 +17,53 @@
       <input
         v-model="search"
         type="text"
-        class="form-input text-primary focus:outline-0 h-10 p-2"
+        class="form-input text-primary bg-white border border-gray-300 rounded focus:outline-0 h-10 p-2 dark:bg-gray-900 dark:border-gray-600"
         :class="props.showFilterInputs ? 'md:col-start-2 md:col-end-4' : 'col-start-1 col-end-2'"
-        placeholder="Search ..."
+        :placeholder="texts.search"
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-// Import Vue Files 
-import { watch, defineEmits, defineProps, ref, type Ref } from "vue";
+// Import Vue Files
+import { watch, computed, ref, type Ref } from "vue";
 import Multiselect from "@suadelabs/vue3-multiselect";
 import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+import type { SearchPayload, TableTexts } from "../types";
+
+//Props and Emits
+const emits = defineEmits<{
+  (e: "search", payload: string | SearchPayload): void;
+}>();
+const props = defineProps<{
+  filtersOptions?: string[];
+  showFilterInputs?: boolean;
+  debounce: number;
+  texts: TableTexts;
+}>();
 
 // Variables
-const options: Ref<string[]> = ref([...props.filtersOptions]);
+const options = computed<string[]>(() => props.filtersOptions ?? []);
 const filterValue: Ref<string> = ref("");
 const search: Ref<string> = ref("");
 
-//Props and Emits
-const emits = defineEmits(["search"]);
-const props = defineProps(["filtersOptions", "showFilterInputs"]);
-
 //Functions
-function debounce(func: any, wait: any) {
-  let timeout: any;
-  return (...args: any) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-const debouncedSearchEmit = debounce((newValue: any) => {
-  emits("search", newValue);
-}, 1000);
+const payload = (): string | SearchPayload =>
+  props.showFilterInputs
+    ? { keySearch: filterValue.value, inputValue: search.value }
+    : search.value;
 
-watch(search, (newValue: any) => {
-  if (props.showFilterInputs === true) {
-    debouncedSearchEmit({
-      keySearch: filterValue.value,
-      inputValue: newValue,
-    });
-  } else {
-    debouncedSearchEmit(newValue);
-  }
+let timeout: ReturnType<typeof setTimeout>;
+watch(search, () => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => emits("search", payload()), props.debounce);
+});
+
+// Changing the filter searches again right away. The first value is the preselected one, so it is skipped.
+watch(filterValue, (_newValue, oldValue) => {
+  if (!oldValue) return;
+  clearTimeout(timeout);
+  emits("search", payload());
 });
 </script>
 <style>

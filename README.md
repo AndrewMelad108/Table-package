@@ -1,331 +1,85 @@
-# VTable Component
+# v-table-system
 
-## Overview
+A data table for **Vue 3** that also ships as a **web component**, so it works in React, Angular, Svelte or a plain HTML page.
 
-This component is a dynamic, customizable table designed to handle various data representations. It is built with **Vue 3**, **Vite**, and **TypeScript**. The component includes pagination, filtering options, and the ability to search through data, making it versatile for different use cases.
+- Column definitions with formatters, alignment and widths
+- Sorting, search with a field filter, pagination with page sizes
+- Client-side mode (the table does the work) or server-side mode (your API does)
+- Row selection, expandable rows, row actions
+- CSV export
+- Slots for every cell and header
+- Dark mode, right-to-left, translated texts
 
 ## Installation
-
-To use this component in your Vue.js project, install the npm package:
 
 ```bash
 npm install v-table-system
 ```
 
-## Usage
+## Usage in Vue
 
-### in Vue Template:
-
-```bash
+```vue
 <template>
-  <VTable
-    :labels="labels"
-    :data="data"
-    :currentPage="currentPage"
-    :totalPages="150"
-    @changePage="changePage"
-  ></VTable>
+  <VTable :columns="columns" :data="products" clientSide isShowSearch selectable rowKey="id" :pageSizeOptions="[10, 25, 50]" />
 </template>
 
-```
-
-### in Vue Script:
-
-```bash
 <script setup lang="ts">
-import { ref } from "vue";
-import { VTable } from "v-table-system";
-const labels = ref(["name", "description", "actions"]);
-const currentPage = ref(1);
-const data = ref([
-  {
-    name: "asd",
-    description: "asd",
-    actions: [
-      {
-        tag: "<p>add</p>",
-        style: {},
-        callback: () => {
-          return console.log("add success");
-        },
-      },
-      {
-        tag: "<p>edit</p>",
-        style: {},
-        callback: () => {
-          return console.log("edit success");
-        },
-      },
-    ],
-  },
-]);
-// VPagination Function
-const changePage = (page) => {
-  currentPage.value = page;
-};
+import { VTable, type Column } from "v-table-system";
 
-</script>
+const columns: Column[] = [
+  { key: "id", label: "ID", sortable: true },
+  { key: "name", label: "Name", sortable: true },
+  { key: "price", label: "Price", align: "right", format: (value) => `$${value}` },
+];
 
-```
-
-## Select Row Functionality
-
-To enable select row functionality in the VTable component, use the following template:
-
-### in Vue Template:
-
-```bash
-<template>
-  <VTable
-    :labels="labels"
-    :data="data"
-    :currentPage="currentPage"
-    :totalPages="150"
-    :sortableColumns="sortableColumns"
-    @changePage="changePage"
-    @SortBy="SortBy"
-    @selectRow="selectRowHandler"  <!-- Capture the selected row -->
-  ></VTable>
-</template>
-```
-
-### in Vue Script:
-
-```bash
-<script setup lang="ts">
-import { ref } from "vue";
-import { VTable } from "v-table-system";
-
-const labels = ref(["name", "description", "actions"]);
-const currentPage = ref(1);
-const sortableColumns = ref(["name", "description"]);
-
-const data = ref([
-  {
-    name: "John Doe",
-    description: "Sample Description",
-    actions: [
-      {
-        tag: "<p>add</p>",
-        style: {},
-        callback: () => {
-          console.log("add success");
-        },
-      },
-      {
-        tag: "<p>edit</p>",
-        style: {},
-        callback: () => {
-          console.log("edit success");
-        },
-      },
-    ],
-  },
-  {
-    name: "Jane Smith",
-    description: "Another Description",
-    actions: [
-      {
-        tag: "<p>add</p>",
-        style: {},
-        callback: () => {
-          console.log("add success");
-        },
-      },
-      {
-        tag: "<p>edit</p>",
-        style: {},
-        callback: () => {
-          console.log("edit success");
-        },
-      },
-    ],
-  },
-]);
-
-// Handle row selection
-const selectRowHandler = (selectedRow) => {
-  console.log("Selected Row:", selectedRow);
-  // Implement any additional actions based on the selected row
-};
-</script>
-```
-## Search Functionality
-
-To enable search functionality in the VTable component, use the following template:
-
-### in Vue Template:
-
-```bash
-<template>
-  <VTable
-    :labels="labels"
-    :data="data"
-    :currentPage="currentPage"
-    :totalPages="150"
-    @changePage="changePage"
-    :isShowSearch="true"  // Show search input
-    @Search="handleSearch"  // Handle search functionality
-  ></VTable>
-</template>
-```
-
-### in Vue Script:
-
-```bash
-<script setup lang="ts">
-import { ref } from "vue";
-import { VTable } from "v-table-system";
-
-const labels = ref(["name", "description", "actions"]);
-const currentPage = ref(1);
-const searchValue = ref("");
-const data = ref([
-  {
-    // Your data here
-  },
-]);
-
-// Search Function
-const handleSearch = (value) => {
-  searchValue.value = value;
-  // Implement search logic based on searchValue
-};
+const products = [
+  { id: 1, name: "Keyboard", price: 49 },
+  { id: 2, name: "Mouse", price: 19 },
+];
 </script>
 ```
 
-## Filter Functionality
+With `clientSide` the table searches, sorts and paginates `data` itself. Without it, pass one page of rows plus `totalItems` and `itemsPerPage`, and reload on the `changePage`, `Search` and `SortBy` events.
 
-To add filtering capabilities, you can use the following structure:
+## Usage in any other framework
 
-### in Vue Template:
+```html
+<v-table-system id="table" client-side is-show-search row-key="id"></v-table-system>
 
-```bash
-<template>
-  <VTable
-    :labels="labels"
-    :data="data"
-    :currentPage="currentPage"
-    :totalPages="150"
-    :isShowSearch="true"  // Enable search input
-    :showFilterInputs="true"  // Enable filter inputs
-    :filtersOptions="filtersOptions"  // Provide filter options
-    @Search="handleSearch"  // Handle search with filters
-    @changePage="changePage"
-  ></VTable>
-</template>
-```
-
-### in Vue Script:
-
-```bash
-<script setup lang="ts">
-import { ref } from "vue";
-import { VTable } from "v-table-system";
-
-const labels = ref(["name", "description", "actions"]);
-const currentPage = ref(1);
-const searchValue = ref("");  // Search value
-const filtersOptions = ref([
-  "value1",
-  "value2",
-  "value3",
-  "value4",
-]);  // Filter options
-const data = ref([
-  {
-    // Your data here
-  },
-]);
-
-// Search Function with Filter Options
-const handleSearch = (filterObject) => {
-  /*
-  filterObject = {
-    inputValue: "",
-    keySearch: "value1"
-  }
-  */
-  searchValue.value = filterObject.inputValue;
-  const filterKey = filterObject.keySearch;
-  // Implement search and filtering logic based on searchValue and filterKey
-};
+<script src="https://unpkg.com/v-table-system/dist/v-table-system.element.iife.js"></script>
+<script>
+  const table = document.getElementById("table");
+  table.columns = [
+    { key: "id", label: "ID", sortable: true },
+    { key: "name", label: "Name", sortable: true },
+  ];
+  table.data = [
+    { id: 1, name: "Keyboard" },
+    { id: 2, name: "Mouse" },
+  ];
+  table.addEventListener("changePage", (event) => console.log(event.detail[0]));
 </script>
-
 ```
 
-## Sort Functionality
+With a bundler, `import "v-table-system/element"` registers the same `<v-table-system>` tag.
 
-To add sorting capabilities, you can use the following structure:
+## Documentation
 
-### in Vue Template:
+The full guide, live examples, framework guides (React, Angular, Svelte) and the API reference are in the `docs` folder:
 
 ```bash
-<template>
-  <VTable
-    :labels="labels"
-    :data="data"
-    :currentPage="currentPage"
-    :totalPages="150"
-    :sortableColumns="sortableColumns"
-    @changePage="changePage"
-    @SortBy="SortBy"
-  ></VTable>
-</template>
+npm run docs:dev      # run the docs site locally
+npm run docs:build    # build it into docs/.vitepress/dist
 ```
 
-### in Vue Script:
+## Development
 
 ```bash
-<script setup lang="ts">
-import { ref } from "vue";
-import { VTable } from "v-table-system";
-
-// Define the columns that are sortable
-const sortableColumns = ref(["name", "description"]);
-
-// Define the labels for the table columns
-const labels = ref(["name", "description", "actions"]);
-
-// Track the current page number
-const currentPage = ref(1);
-
-// Sample data to display in the table
-const data = ref([
-  {
-    name: "Example Name",
-    description: "Example Description",
-    actions: [
-      {
-        tag: "<p>add</p>",
-        style: {},
-        callback: () => {
-          console.log("add success");
-        },
-      },
-      {
-        tag: "<p>edit</p>",
-        style: {},
-        callback: () => {
-          console.log("edit success");
-        },
-      },
-    ],
-  },
-]);
-
-// Sort function to handle sorting logic
-const SortBy = (Sortobject) => {
-  /*
-  Sortobject = {
-    title: title,        // The column title to sort by
-    direction: direction // The sorting direction (asc or desc)
-  };
-  */
-  console.log(`Sorting by: ${Sortobject.title} in ${Sortobject.direction} order`);
-  // Implement your sorting logic here
-};
-</script>
-
-
+npm install
+npm run build   # Vue component, web component and type declarations into dist
+npm test        # type check
 ```
+
+## License
+
+Apache-2.0

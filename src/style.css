@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Reset limited to the table, so the styles of the host page are left alone.
+   :where() keeps the specificity at zero and lets every utility class win. */
+@layer base {
+  :where(.vts),
+  :where(.vts) *,
+  :where(.vts) ::before,
+  :where(.vts) ::after {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+  }
+  :where(.vts) {
+    line-height: 1.5;
+  }
+  :where(.vts p, .vts ul, .vts ol) {
+    margin: 0;
+    padding: 0;
+  }
+  :where(.vts ul, .vts ol) {
+    list-style: none;
+  }
+  :where(.vts button, .vts input, .vts select) {
+    font: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  :where(.vts button) {
+    background: transparent;
+    cursor: pointer;
+  }
+  :where(.vts button:disabled) {
+    cursor: default;
+  }
+  :where(.vts table) {
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-indent: 0;
+  }
+  :where(.vts img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
