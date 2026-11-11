@@ -13,6 +13,9 @@ export default defineConfig(({ mode }) => {
     define: isElement ? { "process.env.NODE_ENV": JSON.stringify("production") } : {},
     build: {
       cssCodeSplit: false,
+      // vue3-multiselect is CommonJS and calls require("vue"). Vue has no default
+      // export in its ES build, so import it as a namespace.
+      commonjsOptions: { esmExternals: true },
       copyPublicDir: false,
       emptyOutDir: !isElement,
       lib: isElement

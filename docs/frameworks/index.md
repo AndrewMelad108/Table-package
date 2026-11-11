@@ -2,6 +2,8 @@
 
 Outside Vue, use the table as a standard custom element, `<v-table-system>`. Vue is bundled inside it, so there is nothing else to install. It has the same features as the Vue component.
 
+There is a page for each framework: [Vue](/frameworks/vue), [React](/frameworks/react), [Next.js](/frameworks/next), [Angular](/frameworks/angular), [Astro](/frameworks/astro) and [Svelte](/frameworks/svelte). This page covers plain HTML and the rules that apply everywhere.
+
 <script setup>
 import WebComponent from '../demos/WebComponent.vue'
 </script>

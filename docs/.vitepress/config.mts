@@ -16,7 +16,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: "Guide", link: "/guide/getting-started" },
-      { text: "Other frameworks", link: "/frameworks/" },
+      { text: "Frameworks", link: "/frameworks/" },
       { text: "API", link: "/api" },
       { text: "npm", link: "https://www.npmjs.com/package/v-table-system" },
     ],
@@ -39,11 +39,14 @@ export default defineConfig({
         ],
       },
       {
-        text: "Other frameworks",
+        text: "Frameworks",
         items: [
           { text: "Web component", link: "/frameworks/" },
+          { text: "Vue", link: "/frameworks/vue" },
           { text: "React", link: "/frameworks/react" },
+          { text: "Next.js", link: "/frameworks/next" },
           { text: "Angular", link: "/frameworks/angular" },
+          { text: "Astro", link: "/frameworks/astro" },
           { text: "Svelte", link: "/frameworks/svelte" },
         ],
       },

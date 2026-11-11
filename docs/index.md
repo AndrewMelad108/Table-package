@@ -22,7 +22,7 @@ features:
   - title: Table features
     details: Column definitions, sorting, search with a filter, page sizes, row selection, expandable rows, row actions and CSV export.
   - title: Works outside Vue
-    details: Ships as a standard custom element with Vue bundled inside, so it runs in React, Angular, Svelte or a plain HTML page.
+    details: Ships as a standard custom element with Vue bundled inside, so it runs in React, Next.js, Angular, Astro, Svelte or a plain HTML page.
   - title: Customisation
     details: Slots for every cell and header, formatters, row classes, translated texts, dark mode and right-to-left layouts.
 ---

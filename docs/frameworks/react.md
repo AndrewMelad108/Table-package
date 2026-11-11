@@ -1,6 +1,6 @@
 # React
 
-Register the [web component](/frameworks/) once, then wrap it in a small React component that passes the data and listens to the events through a ref. This works in React 18 and 19.
+Register the [web component](/frameworks/) once, then wrap it in a small React component that passes the data and listens to the events through a ref. It was tested with React 19.
 
 ```bash
 npm install v-table-system
@@ -93,12 +93,6 @@ declare module "react" {
 }
 ```
 
-## Next.js
+## Next.js and other server-rendered React
 
-The element needs the browser. Put the wrapper in a client component (`"use client"`) and load it without server rendering:
-
-```tsx
-import dynamic from "next/dynamic";
-
-const DataTable = dynamic(() => import("./DataTable").then((module) => module.DataTable), { ssr: false });
-```
+With server rendering, register the element after hydration instead of at the top of the file. The [Next.js page](/frameworks/next) has a complete example.

@@ -3,7 +3,7 @@
 `v-table-system` is a data table. It comes in two forms:
 
 - a Vue 3 component, `VTable`, covered in this guide
-- a web component, `<v-table-system>`, for [React, Angular, Svelte and plain HTML](/frameworks/)
+- a web component, `<v-table-system>`, for [React, Next.js, Angular, Astro, Svelte and plain HTML](/frameworks/)
 
 Both have the same features and the same options.
 

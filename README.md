@@ -65,7 +65,7 @@ With a bundler, `import "v-table-system/element"` registers the same `<v-table-s
 
 ## Documentation
 
-The full guide, live examples, framework guides (React, Angular, Svelte) and the API reference are in the `docs` folder:
+The full guide, live examples, framework guides (Vue, React, Next.js, Angular, Astro, Svelte) and the API reference are in the `docs` folder:
 
 ```bash
 npm run docs:dev      # run the docs site locally
